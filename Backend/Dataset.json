@@ -1,0 +1,112 @@
+{
+    "Physics": [
+        {
+            "Topic": "Thermodynamics",
+            "Questions": [
+                "The temperature of a gas is -78 degree Celsius and the average translational kinetic energy of its molecules is K. The temperature at which the average translational kinetic energy of the molecules of the same gas becomes 2K is:",
+                "The volume of an ideal gas (γ=1.5) is changed adiabatically from 5 litres to 4 litres. The ratio of initial pressure to final pressure is:",
+                "A sample of 1 mole gas at temperature T is adiabatically expanded to double its volume. If adiabatic constant for the gas is γ=32, then the work done by the gas in the process is:",
+                "A diatomic gas (γ=1.4) does 100 J of work in an isobaric expansion. The heat given to the gas is:",
+                "Given below are two statements:\nStatement (I): The mean free path of gas molecules is inversely proportional to square of molecular diameter.\nStatement (II): Average kinetic energy of gas molecules is directly proportional to absolute temperature of gas.\nIn the light of the above statements, choose the correct answer from the options given below:"
+            ],
+            "Options": [
+                { "A": "-78 degree Celsius", "B": "127 degree Celsius", "C": "-39 degree Celsius", "D": "117 degree Celsius" },
+                { "A": "4/5", "B": "8/(5√5)", "C": "2/√5", "D": "16/25" },
+                { "A": "RT[2+√2]", "B": "RT[2-√2]", "C": "(R/T)([2-√2])", "D": "(T/R)[2+√2]" },
+                { "A": "150J", "B": "490J", "C": "350J", "D": "250J" },
+                { "A": "Statement I is false but Statement II is True", "B": "Both Statement I and II are True", "C": "Statement I is True but Statement II is False", "D": "Both Statement I and II are False" }
+            ],
+            "Answer": [
+                "117 degree Celsius",
+                "8/(5√5)",
+                "RT[2-√2]",
+                "350J",
+                "Both Statement I and II are True"
+            ],
+            "Explanation": [
+                "https://questions.examside.com/past-years/jee/question/pa-real-gas-within-a-closed-chamber-at-27circ-mathr-jee-main-physics-motion-vqtxb4pfgum9uvct"
+            ]
+        },
+        {
+            "Topic": "Motion In a Plane",
+            "Questions": [
+                "The angle of projection for a projectile to have same horizontal range and maximum height is:",
+                "The co-ordinates of a particle moving in x-y plane are given by: x=2+4t, y=3t+8t^2. The motion of the particle is:",
+                "Position of an ant (S in metres) moving in Y-Z plane is given by S=2t^2 j^+5k^ (where t is in second). The magnitude and direction of velocity of the ant at t=1 s will be:",
+                "The trajectory of projectile, projected from the ground is given by y = x - x^2/20. Where x and y are measured in meter. The maximum height attained by the projectile will be.",
+                "Given below are two statements : one is labelled as Assertion A and the other is labelled as Reason R Assertion A : When a body is projected at an angle, it's range is maximum. Reason R : For maximum range, the value of  should be equal to one. In the light of the above statements, choose the correct answer from the options given below:"
+            ],
+            "Options" : [
+                { "A": "tan^(-1)(1/2)", "B": "tan^(-1)(2)", "C": "tan^(-1)(1/4)", "D": "tan^(-1)(4)" },
+                { "A": "uniform motion along a straight line", "B": "non-uniformly accelerated", "C": "uniformly accelerated having motion along a straight line", "D": "uniformly accelerated having motion along a parabolic path" },
+                { "A": "16m/s in y-direction ", "B": "4m/s in x-direction", "C": "9m/s in ", "D": "4m/s in y-direction" }  ,
+                { "A": "10m", "B": "5m", "C": "200m", "D": "10√2m" },
+                { "A": "Both A and R are correct and R is the correct explanation of A", "B": "A is true but R is false", "C": "A is false but R is true", "D": "Both A and R are correct but R is not the correct explanation of A" }
+            ],
+            "Answer": [
+                "tan^(-1)(4)",
+                "uniformly accelerated having motion along a parabolic path",
+                "4m/s in y-direction",
+                "5m",
+                "Both A and R are correct and R is the correct explanation of A"
+            ],
+            "Explanation": [
+                "https://questions.examside.com/past-years/jee/question/pa-real-gas-within-a-closed-chamber-at-27circ-mathr-jee-main-physics-motion-vqtxb4pfgum9uvct"
+            ]
+        }
+    ],
+    "Chemistry": [
+        {
+            "Topic": "Chemical Bonding",
+            "Questions": [
+                "Which of the following has the highest bond dissociation energy?",
+                "The molecular shape of methane (CH₄) is:",
+                "In an octahedral structure, how many 90° angles are present between bonds?",
+                "What is the hybridization of central atom in SF₆?",
+                "Given below are two statements:\nStatement (I): The bond angle in H₂O is 104.5°.\nStatement (II): The bond angle in NH₃ is 107°.\nIn the light of the above statements, choose the correct answer from the options given below:"
+            ],
+            "Options": [
+                { "A": "N₂", "B": "O₂", "C": "F₂", "D": "Cl₂" },
+                { "A": "Linear", "B": "Bent", "C": "Trigonal Planar", "D": "Tetrahedral" },
+                { "A": "4", "B": "6", "C": "8", "D": "12" },
+                { "A": "sp", "B": "sp²", "C": "sp³d", "D": "sp³d²" },
+                { "A": "Statement I is false but Statement II is True", "B": "Both Statement I and II are True", "C": "Statement I is True but Statement II is False", "D": "Both Statement I and II are False" }
+            ],
+            "Answer": [
+                "N₂",
+                "Tetrahedral",
+                "12",
+                "sp³d²",
+                "Both Statement I and II are True"
+            ]
+        }
+    ],
+    "Maths": [
+        {
+            "Topic": "Calculus",
+            "Questions": [
+                "What is the derivative of sin(x) with respect to x?",
+                "Evaluate the limit: lim(x→0) (sin(x)/x).",
+                "If f(x) = x², then what is the integral of f(x) with respect to x?",
+                "Find the value of the integral: ∫(1/x) dx.",
+                "What is the second derivative of the function f(x) = x³?"
+            ],
+            "Options": [
+                { "A": "cos(x)", "B": "-cos(x)", "C": "sin(x)", "D": "-sin(x)" },
+                { "A": "0", "B": "1", "C": "∞", "D": "Undefined" },
+                { "A": "x³/3 + C", "B": "x³ + C", "C": "2x + C", "D": "x² + C" },
+                { "A": "ln(x) + C", "B": "e^x + C", "C": "1/x + C", "D": "x + C" },
+                { "A": "3x²", "B": "6x", "C": "2x", "D": "x" }
+            ],
+            "Answer": [
+                "cos(x)",
+                "1",
+                "x³/3 + C",
+                "ln(x) + C",
+                "6x"
+            ]
+        }
+    ]
+}
+
+
