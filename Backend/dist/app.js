@@ -21,6 +21,7 @@ const bcrypt_1 = __importDefault(require("bcrypt"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const Auth_1 = __importDefault(require("./Middlewares/Auth"));
+const Dataset_1 = require("./Dataset");
 const userRoute = (0, express_1.default)();
 const prisma = new client_1.PrismaClient();
 const userSchema = zod_1.default.object({
@@ -169,6 +170,39 @@ userRoute.get('/api/getUser', (req, res) => __awaiter(void 0, void 0, void 0, fu
         }
     }
 }));
+userRoute.post('/api/dataset', Auth_1.default, (req, res) => {
+    const { subject, topic } = req.body;
+    let questions = [];
+    let topicFound = false;
+    if (subject === 'physics') {
+    }
+    else if (subject === 'chemistry') {
+        const keys = Object.keys(Dataset_1.jeeQuestions.Chemistry);
+        keys.forEach((key) => {
+            if (key == topic) {
+                topicFound = true;
+                const getKeys = Object.keys(Dataset_1.jeeQuestions.Chemistry[topic]);
+                console.log(getKeys);
+                getKeys.forEach((item) => {
+                    const topicKey = topic;
+                    const data = Dataset_1.jeeQuestions.Chemistry[topicKey];
+                    const value = data[item];
+                    questions = questions.concat(value);
+                });
+            }
+        });
+    }
+    else if (subject === 'maths') {
+    }
+    else
+        res.json({ "msg": "Subject sent is not proper" });
+    if (!topicFound) {
+        res.json({ "msg": "Topic sent is incorrect" });
+    }
+    else {
+        res.json({ dataset: questions });
+    }
+});
 // userRoute.use(AuthTokenCheck);
 userRoute.listen(3000, () => {
     console.log("app listening to port ", 3000);

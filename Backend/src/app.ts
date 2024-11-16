@@ -7,6 +7,7 @@ import bcrypt from 'bcrypt'
 import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
 import AuthTokenCheck from './Middlewares/Auth'
+import {jeeQuestions} from './Dataset' 
 
 const userRoute = express();
 const prisma  = new PrismaClient();
@@ -27,6 +28,34 @@ userRoute.use(cors({
     methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
 }))
 userRoute.use(express.urlencoded({ extended: true }));
+
+
+interface Option {
+  text: string;
+  correct?: boolean;
+}
+
+interface Question {
+  question: string;
+  options: Option[];
+  answer?:string
+  explanation: string;
+}
+
+interface Topic {
+  [year: string]: Question[]; 
+}
+
+interface types {
+  [topic: string]: Topic; 
+}
+
+interface JEEQuestions {
+  Chemistry: types,
+  Physics : types,
+  Maths : types
+}
+
 
 
 userRoute.get('/' ,AuthTokenCheck, (req,res)=>{
@@ -169,6 +198,46 @@ userRoute.get('/api/getUser', async (req: Request, res: Response) => {
   }}
 });
 
+userRoute.post('/api/dataset',AuthTokenCheck,(req:Request, res:Response)=>{
+  const {subject,topic}  = req.body;
+  let questions : any[] = [];
+  let topicFound = false;
+  if(subject === 'physics')
+  {
+
+  }
+  else if(subject == 'chemistry')
+  {
+    const keys = Object.keys(jeeQuestions.Chemistry);
+    keys.forEach((key)=>{
+      if(key == topic)
+      {
+        topicFound = true
+        const getKeys = Object.keys(jeeQuestions.Chemistry[topic as keyof typeof jeeQuestions.Chemistry])
+        console.log(getKeys)
+        getKeys.forEach((item)=>{
+          const topicKey = topic as keyof typeof jeeQuestions.Chemistry
+          const data = jeeQuestions.Chemistry[topicKey]
+          const value = data[item as keyof typeof data]
+          questions = questions.concat(value);
+        })
+      }
+    })
+  }
+  else if(subject === 'maths')
+    {
+      
+    }
+    else
+    res.json({"msg":"Subject sent is not proper"});
+  if(!topicFound)
+  {
+    res.json({"msg":"Topic sent is incorrect"})
+  }
+  else{
+    res.json({dataset:questions})
+  }
+})
 
 // userRoute.use(AuthTokenCheck);
 userRoute.listen(3000 , ()=>{

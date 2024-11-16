@@ -137,7 +137,7 @@ function MathsTopicPage() {
         {MathsTOPIC.map((item, index) => (
           <div className="h-auto w-full shadow-lg hover:shadow-xl transition"
           >
-          <WobbleCard className={`${colors[index % colors.length]} h-52 flex flex-col`}>
+          <WobbleCard className={`${colors[index % colors.length]} h-52 flex flex-col`} containerClassName={`${colors[index % colors.length]}`}>
             <div className='grid grid-cols-2'>
             <span className="text-lg font-mono -mt-10 -ml-4">{item.topic}</span>
             <img

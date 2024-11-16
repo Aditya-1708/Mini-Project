@@ -1,11 +1,9 @@
-import React from 'react';
 import { FloatingDock } from '../components/floatingNavbar';
 import { links } from '../navbarItems';
 import { WobbleCard } from '../components/WobbleCard';
 import physics from '../assets/maths.jpg'
 const PhysicsTOPIC = [
-  { topic: "Units & Measurements", img: "" },
-  { topic: "Vector Algebra", img: "" },
+  { topic: "Units And Measurements", img: "" },
   { topic: "Motion in a Straight Line", img: "" },
   { topic: "Motion in a Plane", img: "" },
   { topic: "Circular Motion", img: "" },
@@ -13,7 +11,6 @@ const PhysicsTOPIC = [
   { topic: "Work Power & Energy", img: "" },
   { topic: "Center of Mass and Collision", img: "" },
   { topic: "Rotational Motion", img: "" },
-  { topic: "Properties of Matter", img: "" },
   { topic: "Waves", img: "" },
   { topic: "Simple Harmonic Motion", img: "" },
   { topic: "Gravitation", img: "" },
@@ -28,7 +25,6 @@ const PhysicsTOPIC = [
   { topic: "Atoms and Nuclei", img: "" },
   { topic: "Wave Optics", img: "" },
   { topic: "Geometrical Optics", img: "" },
-  { topic: "Communication Systems", img: "" },
   { topic: "Semiconductor", img: "" },
   { topic: "Dual Nature of Radiation", img: "" },
 ];

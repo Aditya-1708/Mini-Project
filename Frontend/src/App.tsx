@@ -8,6 +8,7 @@ import PerformanceAnalytics from './pages/PerformanceAnalytics'
 import PhysicsTopicPage from './pages/PhysicsTopicPage'
 import MathsTopicPage from './pages/MathsTopicPage'
 import ChemistryTopicsPage from './pages/ChemistryTopicsPage'
+import QuestionInterface from './pages/QuestionInterface'
 function App() {
 
   return (
@@ -22,6 +23,7 @@ function App() {
       <Route path='/physicsTopics' element={<PhysicsTopicPage></PhysicsTopicPage>}></Route> 
       <Route path='/mathsTopics' element={<MathsTopicPage></MathsTopicPage>}></Route> 
       <Route path='/chemistryTopics' element={<ChemistryTopicsPage></ChemistryTopicsPage>}></Route> 
+      <Route path='/questionInterface' element={<QuestionInterface></QuestionInterface>}></Route> 
     </Routes>
       </BrowserRouter>
     </>

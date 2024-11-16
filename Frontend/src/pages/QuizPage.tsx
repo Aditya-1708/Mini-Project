@@ -5,8 +5,15 @@ import chemistry from '../assets/chemistry.jpg'
 import maths from '../assets/maths.jpg'
 import physics from '../assets/physics.jpg'
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { BACKEND_URL } from '../config';
+import { useEffect, useState } from 'react';
+
+
 const QuizPage = () => {
   const navigate = useNavigate();
+  const [questions,setQuestions] = useState({});
+
   const handleClickPhysics = ()=>{
     navigate('/physicsTopics')
   }
@@ -16,6 +23,22 @@ const QuizPage = () => {
   const handleClickMaths= ()=>{
     navigate('/mathsTopics')
   }
+
+  useEffect(()=>{
+
+    const dataset = async() => {
+     try {
+       const response = await axios.get(`${BACKEND_URL}/dataset`,{
+        withCredentials:true
+       });
+       console.log(response.data)
+        setQuestions(response.data);
+     } catch (e) {
+       console.log(e);
+     }
+   };
+   dataset();
+  },[])
 
   return (
     <div className="p-8 bg-[#1B1B1B] text-white min-h-screen space-y-12">
@@ -92,15 +115,6 @@ const QuizPage = () => {
               <span className="text-lg font-mono text-white absolute pl-16 pt-8">2023</span>
             </div>
           </WobbleCard>
-          <WobbleCard 
-            containerClassName="w-1/3 relative"
-            className="h-48 flex items-center justify-start bg-[#74B9FF] shadow-lg hover:shadow-xl transition relative overflow-hidden rounded-lg"
-          >
-            <span className="text-lg font-mono ml-4 z-10">JEE</span>
-            <div className="triangle-shape">
-              <span className="text-lg font-mono text-white absolute pl-16 pt-8">2022</span>
-            </div>
-          </WobbleCard>
         </div>
       </div>
 
@@ -120,8 +134,8 @@ const QuizPage = () => {
             </button>
           </div>
         </div>
+        {}
       </div>
-
         {/* Fixed Bottom Navigation */}
         <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 mb-4">
         <FloatingDock items={links} />
