@@ -27,7 +27,7 @@ const prisma = new client_1.PrismaClient();
 const userSchema = zod_1.default.object({
     username: zod_1.default.string().optional(),
     email: zod_1.default.string().email(),
-    password: zod_1.default.string().min(8, "Password must be of min 8 letters")
+    password: zod_1.default.string().min(8, "Password must be of min 8 letters"),
 });
 dotenv_1.default.config();
 const jwt_secret_key = process.env.JWT_SECRET_KEY;
@@ -36,13 +36,13 @@ userRoute.use((0, cookie_parser_1.default)());
 userRoute.use((0, cors_1.default)({
     credentials: true,
     origin: "http://localhost:5173",
-    methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
+    methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD"],
 }));
 userRoute.use(express_1.default.urlencoded({ extended: true }));
-userRoute.get('/', Auth_1.default, (req, res) => {
+userRoute.get("/", Auth_1.default, (req, res) => {
     res.send("Hello world");
 });
-userRoute.post('/api/signin', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+userRoute.post("/api/signin", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = req.body;
     // Validate input using Zod schema
     const inputValidation = userSchema.safeParse({ email, password });
@@ -55,8 +55,8 @@ userRoute.post('/api/signin', (req, res) => __awaiter(void 0, void 0, void 0, fu
             // Find the user by email
             const user = yield prisma.user.findUnique({
                 where: {
-                    email: email
-                }
+                    email: email,
+                },
             });
             if (!user) {
                 res.status(404).send("User not found");
@@ -70,10 +70,15 @@ userRoute.post('/api/signin', (req, res) => __awaiter(void 0, void 0, void 0, fu
                 else {
                     // Generate JWT token
                     const token = jsonwebtoken_1.default.sign({
-                        id: user.id
-                    }, jwt_secret_key, { expiresIn: '1h' });
+                        id: user.id,
+                    }, jwt_secret_key, { expiresIn: "1h" });
                     // Set token as a cookie
-                    res.cookie("token", token, { maxAge: 60 * 60 * 1000, httpOnly: true, path: '/', sameSite: 'lax' });
+                    res.cookie("token", token, {
+                        maxAge: 60 * 60 * 1000,
+                        httpOnly: true,
+                        path: "/",
+                        sameSite: "lax",
+                    });
                     res.status(200).send("logged in");
                 }
             }
@@ -84,7 +89,7 @@ userRoute.post('/api/signin', (req, res) => __awaiter(void 0, void 0, void 0, fu
         }
     }
 }));
-userRoute.post('/api/signup', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+userRoute.post("/api/signup", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, email, password } = req.body;
     const inputValidation = userSchema.safeParse({ username, email, password });
     if (!inputValidation.success) {
@@ -94,8 +99,8 @@ userRoute.post('/api/signup', (req, res) => __awaiter(void 0, void 0, void 0, fu
         try {
             const user = yield prisma.user.findUnique({
                 where: {
-                    email
-                }
+                    email,
+                },
             });
             if (user) {
                 res.status(409).send("Already have an account");
@@ -106,15 +111,17 @@ userRoute.post('/api/signup', (req, res) => __awaiter(void 0, void 0, void 0, fu
                     data: {
                         username,
                         email,
-                        password: hashPassword
-                    }
+                        password: hashPassword,
+                    },
                 });
-                const token = jsonwebtoken_1.default.sign({ id: response.id }, jwt_secret_key, { expiresIn: '1h' });
+                const token = jsonwebtoken_1.default.sign({ id: response.id }, jwt_secret_key, {
+                    expiresIn: "1h",
+                });
                 res.cookie("token", token, {
                     maxAge: 60 * 60 * 1000,
                     httpOnly: true,
-                    sameSite: 'lax',
-                    path: '/'
+                    sameSite: "lax",
+                    path: "/",
                 });
                 res.status(201).send("User created successfully");
             }
@@ -124,11 +131,11 @@ userRoute.post('/api/signup', (req, res) => __awaiter(void 0, void 0, void 0, fu
         }
     }
 }));
-userRoute.post('/api/logout', (req, res) => {
-    res.clearCookie('token');
+userRoute.post("/api/logout", (req, res) => {
+    res.clearCookie("token");
     res.status(200).send("Logged out");
 });
-userRoute.get('/api/verifyToken', (req, res) => {
+userRoute.get("/api/verifyToken", (req, res) => {
     const token = req.cookies.token;
     if (!token) {
         res.status(401).send("No token provided");
@@ -144,11 +151,11 @@ userRoute.get('/api/verifyToken', (req, res) => {
         }
     }
 });
-userRoute.get('/api/getUser', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+userRoute.get("/api/getUser", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.query; // Use req.query to get the id from query parameters
     // Check if ID is provided
     if (!id) {
-        res.status(400).json({ message: 'ID is required' });
+        res.status(400).json({ message: "ID is required" });
     }
     else {
         try {
@@ -158,7 +165,7 @@ userRoute.get('/api/getUser', (req, res) => __awaiter(void 0, void 0, void 0, fu
                 },
             });
             if (!user) {
-                res.status(404).json({ message: 'User not found' });
+                res.status(404).json({ message: "User not found" });
             }
             else {
                 res.json(user);
@@ -170,19 +177,32 @@ userRoute.get('/api/getUser', (req, res) => __awaiter(void 0, void 0, void 0, fu
         }
     }
 }));
-userRoute.post('/api/dataset', Auth_1.default, (req, res) => {
+userRoute.post("/api/dataset", Auth_1.default, (req, res) => {
     const { subject, topic } = req.body;
     let questions = [];
     let topicFound = false;
-    if (subject === 'physics') {
+    console.log(subject + "\t" + topic);
+    if (subject === "physics") {
+        const keys = Object.keys(Dataset_1.jeeQuestions.Physics);
+        keys.forEach((key) => {
+            if (key == topic) {
+                topicFound = true;
+                const topicKeys = Object.keys(Dataset_1.jeeQuestions.Physics[topic]);
+                topicKeys.forEach((element) => {
+                    const topicKey = topic;
+                    const data = Dataset_1.jeeQuestions.Physics[topicKey];
+                    const value = data[element];
+                    questions = questions.concat(value);
+                });
+            }
+        });
     }
-    else if (subject === 'chemistry') {
+    else if (subject == "chemistry") {
         const keys = Object.keys(Dataset_1.jeeQuestions.Chemistry);
         keys.forEach((key) => {
             if (key == topic) {
                 topicFound = true;
                 const getKeys = Object.keys(Dataset_1.jeeQuestions.Chemistry[topic]);
-                console.log(getKeys);
                 getKeys.forEach((item) => {
                     const topicKey = topic;
                     const data = Dataset_1.jeeQuestions.Chemistry[topicKey];
@@ -192,15 +212,37 @@ userRoute.post('/api/dataset', Auth_1.default, (req, res) => {
             }
         });
     }
-    else if (subject === 'maths') {
+    else if (subject === "maths") {
     }
-    else
-        res.json({ "msg": "Subject sent is not proper" });
+    else if (subject === "JEE") {
+        const subjects = Object.keys(Dataset_1.jeeQuestions);
+        subjects.forEach((subjectKey) => {
+            const subjectName = Dataset_1.jeeQuestions[subjectKey];
+            const topics = Object.keys(subjectName);
+            topics.forEach((topicKey) => {
+                const topicData = subjectName[topicKey];
+                const yearKeys = Object.keys(topicData);
+                yearKeys.forEach((year) => {
+                    if (year === "JEE2024" && topic === "2024") {
+                        topicFound = true;
+                        const data = topicData[year];
+                        questions = questions.concat(data);
+                    }
+                    else if (year === "JEE2023" && topic === "2023") {
+                        topicFound = true;
+                        const data = topicData[year];
+                        questions = questions.concat(data);
+                    }
+                });
+            });
+        });
+    }
     if (!topicFound) {
-        res.json({ "msg": "Topic sent is incorrect" });
+        res.json({ msg: "Topic not found" });
     }
     else {
-        res.json({ dataset: questions });
+        questions = questions.map((question, index) => (Object.assign(Object.assign({}, question), { id: index + 1 })));
+        res.json(questions);
     }
 });
 // userRoute.use(AuthTokenCheck);

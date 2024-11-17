@@ -24,6 +24,13 @@ const QuizPage = () => {
     navigate('/mathsTopics')
   }
 
+  const handle24yearclick = ()=>{
+    navigate('/questionInterface' , {state:{Subject:"JEE",topic:'2024'}})
+  }
+  const handle23yearclick = ()=>{
+    navigate('/questionInterface' , {state:{Subject:"JEE",topic:'2023'}})
+  }
+
   useEffect(()=>{
 
     const dataset = async() => {
@@ -31,10 +38,9 @@ const QuizPage = () => {
        const response = await axios.get(`${BACKEND_URL}/dataset`,{
         withCredentials:true
        });
-       console.log(response.data)
         setQuestions(response.data);
      } catch (e) {
-       console.log(e);
+       console.error(e);
      }
    };
    dataset();
@@ -55,7 +61,8 @@ const QuizPage = () => {
         <div className="flex gap-6">
           <div onClick={()=>handleClickPhysics()}  className="h-auto flex w-1/3 justify-start  shadow-lg hover:shadow-xl transition relative overflow-hidden">
           <WobbleCard    
-          className='bg-[#f8b305]'      
+          className='bg-[#f8b305]'     
+          containerClassName='bg-[#f8b305]' 
           >
             <button className="text-lg font-mono z-1">Physics</button>
             <img
@@ -67,7 +74,7 @@ const QuizPage = () => {
           </div>
           <div onClick={()=>handleClickChemistry()} className="h-auto flex items-start w-1/3 justify-start shadow-lg hover:shadow-xl transition"
           >
-          <WobbleCard className='bg-[#9ca4f9]'>
+          <WobbleCard className='bg-[#9ca4f9]' containerClassName='bg-[#9ca4f9]' >
             <span className="text-center text-lg font-mono">Chemistry</span>
             <img
               src={chemistry}
@@ -79,6 +86,7 @@ const QuizPage = () => {
           <div onClick={()=>handleClickMaths()} className='h-auto flex items-start justify-start shadow-lg hover:shadow-xl transition w-1/3'>
           <WobbleCard
             className=" bg-[#0c69d7]"
+            containerClassName=" bg-[#0c69d7]"
           >
             <span className="text-center text-lg font-mono">Maths</span>
             <img
@@ -97,24 +105,28 @@ const QuizPage = () => {
         <h2 className="text-2xl font-semibold mb-4">Previous Year Questions</h2>
         <hr className="border-gray-700 mb-4" />
         <div className="flex gap-6">
+          <div onClick={handle24yearclick} className='mr-20 ml-20 w-1/2 relative'>
           <WobbleCard 
-            containerClassName="w-1/3 relative"
+            containerClassName=" bg-[#9e7a57]"
             className="h-48 flex items-center justify-start bg-[#9e7a57] shadow-lg hover:shadow-xl transition relative overflow-hidden rounded-lg"
           >
-            <span className="text-lg font-mono ml-4 z-10">JEE</span>
+            <span className="text-xl font-mono pl-20 z-10">JEE</span>
             <div className="triangle-shape">
               <span className="text-lg font-mono text-white pl-16 pt-8">2024</span>
             </div>
           </WobbleCard>
+          </div>
+          <div onClick={handle23yearclick} className='ml-20 mr-20 w-1/2 relative'>
           <WobbleCard 
-            containerClassName="w-1/3 relative"
+            containerClassName="bg-[#E17055]"
             className="h-48 flex items-center justify-start bg-[#E17055] shadow-lg hover:shadow-xl transition relative overflow-hidden rounded-lg"
           >
-            <span className="text-lg font-mono ml-4 z-10">JEE</span>
+            <span className="text-xl font-mono pl-20 z-10">JEE</span>
             <div className="triangle-shape">
               <span className="text-lg font-mono text-white absolute pl-16 pt-8">2023</span>
             </div>
           </WobbleCard>
+          </div>
         </div>
       </div>
 
