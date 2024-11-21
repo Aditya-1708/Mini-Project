@@ -725,7 +725,7 @@ export const jeeQuestions = {
             },
             {
               text: "5",
-              correcr: true,
+              correct: true,
             },
             {
               text: "3",
@@ -2182,4 +2182,8 @@ export const jeeQuestions = {
   //     ],
   //   },
   // },
-};
+}
+
+
+
+

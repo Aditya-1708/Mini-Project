@@ -46,8 +46,8 @@ function Home() {
         <div>
           <Hero name={user} />
           <FeaturesSectionDemo />
-          <Testimonials />
-          <Footer />
+          {/* <Testimonials />
+          <Footer /> */}
         </div>
       </div>
       <div className="fixed bottom-0 md:left-1/2 md:transform md:-translate-x-1/2 left-4 mb-4">

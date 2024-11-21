@@ -17,7 +17,7 @@ function Hero({name}:{name:User}) {
         {/* Logo */}
         <div className="flex items-center space-x-2">
           <img src="/path/to/logo.png" alt="Logo" className="h-10 w-10" />
-          <span className="text-white text-lg font-semibold">GPhadDenge</span>
+          <span className="text-white text-lg font-semibold">Concept Quest</span>
         </div>
         
         {/* Greeting */}

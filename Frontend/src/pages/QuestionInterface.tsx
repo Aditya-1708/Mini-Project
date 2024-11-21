@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { IconMenu, IconX } from "@tabler/icons-react";
+import { IconClock, IconMenu, IconX } from "@tabler/icons-react";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
 import { useLocation } from "react-router-dom";
@@ -23,6 +23,41 @@ const QuestionInterface: React.FC = () => {
   const [feedback, setFeedback] = useState<string>(""); // Correct/Incorrect Feedback
   const [showSidebar, setShowSidebar] = useState<boolean>(false);
   const location = useLocation();
+  const [elapsedTime, setElapsedTime] = useState<number>(0);
+  const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
+  const [showTimer,setShowTimer] = useState<boolean>(false);
+
+  // Timer functionality
+  useEffect(() => {
+    let timer: NodeJS.Timeout | null = null;
+    if (isTimerRunning) {
+      timer = setInterval(() => {
+        setElapsedTime((prev) => prev + 1);
+      }, 1000);
+    }
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [isTimerRunning]);
+
+  const handleClockClick = () => {
+    setIsTimerRunning((prev) => !prev);
+    setShowTimer(true)
+  };
+
+  const handleResetTimer = () => {
+    setIsTimerRunning(false);
+    setElapsedTime(0);
+  };
+
+  const formatTime = (seconds: number) => {
+    const hrs = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    return `${hrs.toString().padStart(2, "0")}:${mins.toString().padStart(2, "0")}:${secs
+      .toString()
+      .padStart(2, "0")}`;
+  };
 
   // Fetch questions on component load
   useEffect(() => {
@@ -44,7 +79,6 @@ const QuestionInterface: React.FC = () => {
           answer: item.options.find((option: any) => option.correct)?.text || item.answer || "", // Get the correct option's text, fallback to answer field if necessary
           explanation: item.explanation || "", // Explanation with a default fallback
         }));
-        
 
         setQuestions(transformedQuestions);
       } catch (e) {
@@ -93,6 +127,10 @@ const QuestionInterface: React.FC = () => {
       setFeedback("");
       setShowExplanation(false);
     }
+  };
+
+  const handleShowExplanation = () => {
+    setShowExplanation(false);
   };
 
   return (
@@ -194,7 +232,13 @@ const QuestionInterface: React.FC = () => {
             {/* Explanation */}
             {showExplanation && (
               <div className="bg-[#1B1B1B] p-4 rounded shadow-md mt-4">
-                <h4 className="font-semibold text-green-400">Explanation:</h4>
+                <div className="flex flex-row justify-between">
+                  <h4 className="font-semibold text-green-400">Explanation:</h4>
+                  <IconX
+                    onClick={handleShowExplanation}
+                    className="hover:cursor-pointer hover:scale-110 transition"
+                  ></IconX>
+                </div>
                 <p>{currentQuestion.explanation}</p>
               </div>
             )}
@@ -208,6 +252,20 @@ const QuestionInterface: React.FC = () => {
               >
                 Previous
               </button>
+              <div className="flex flex-row items-center">
+                <IconClock
+                  onClick={handleClockClick}
+                  className="hover:cursor-pointer hover:scale-110 transition mr-2"
+                />
+                {showTimer && (<div className="" ><span>{formatTime(elapsedTime)}</span>
+                <button
+                  onClick={handleResetTimer}
+                  className="ml-4 px-4 py-2 bg-gray-600 text-white rounded"
+                >
+                  Reset
+                </button>
+                </div>)}
+              </div>
               <button
                 onClick={handleNext}
                 className="px-4 py-2 bg-blue-600 text-white rounded disabled:bg-gray-500"
